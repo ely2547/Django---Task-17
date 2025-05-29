@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card mx-auto" style="max-width: 400px;">
+        <div class="card-body text-center">
+            <h2 class="card-title">{{ user.username|capfirst }}</h2>
+            <!-- Avatar -->
+            {% if user.profile.avatar %}
+                <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;">
+            {% else %}
+                <img src="{% static 'default_avatar.png' %}" alt="Avatar" class="rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;">
+            {% endif %}
+            <!-- Nombre y Apellido -->
+            <p><strong>Nombre:</strong> {{ user.first_name }}</p>
+            <p><strong>Apellido:</strong> {{ user.last_name }}</p>
+            <!-- Seguidores -->
+            <p><strong>Seguidores:</strong> {{ user.profile.followers_count }}</p>
+            <!-- Botón para editar perfil -->
+            <a href="{% url 'update_profile' %}" class="btn btn-primary mt-2">Editar Perfil</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
